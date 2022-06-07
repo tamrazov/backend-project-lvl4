@@ -2,7 +2,7 @@
 
 export default {
   translation: {
-    appName: 'Fastify Шаблон',
+    appName: 'Home',
     flash: {
       session: {
         create: {
@@ -52,6 +52,10 @@ export default {
           more: 'Узнать Больше',
         },
       },
+    },
+    formNames: {
+      email: 'почтовый адрес',
+      password: 'пароль',
     },
   },
 };

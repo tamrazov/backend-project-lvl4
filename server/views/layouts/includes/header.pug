@@ -1,0 +1,22 @@
+include ../../mixins/forms.pug
+
+header
+  nav.navbar.navbar-expand-lg.navbar-light.bg-light
+    .container-fluid
+      a.navbar-brand(href=route('root'))= t('appName')
+      button.navbar-toggler(data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent")
+        span.navbar-toggler-icon
+      .collapse.navbar-collapse(id="navbarToggleExternalContent")
+        .container-fluid
+          ul.navbar-nav.mr-auto
+            li.nav-item
+              a.nav-link(href=route('users'))= t('layouts.application.users')
+        ul.navbar-nav
+          if isAuthenticated()
+            li.nav-item
+              +buttonTo(route('session'), 'delete')(class="btn nav-link" value=t('layouts.application.signOut'))
+          else
+            li.nav-item
+              a.nav-link(href=route('newSession'))= t('layouts.application.signIn')
+            li.nav-item
+              a.nav-link(href=route('newUser'))= t('layouts.application.signUp')
