@@ -2,7 +2,7 @@
 - const getInputId = (property) => `data_${property}`
 
 mixin formFor(entity = null)
-  form&attributes(attributes)
+  form(class='col-3')&attributes(attributes)
     block
 
 mixin input(entity, propertyName, errors = {})
