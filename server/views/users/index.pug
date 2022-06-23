@@ -11,5 +11,6 @@ block content
       each user in users
         tr
           td= user.id
-          td= user.email
+          td
+           a(href=`users/${user.id}`)= user.email
           td= formatDate(user.createdAt)
