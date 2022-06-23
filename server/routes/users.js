@@ -34,5 +34,13 @@ export default (app) => {
       const user = await app.objection.models.user.query().findById(id);
 
       reply.render('users/user', { user });
+    })
+    .post('/users/:id', async (req) => {
+      const { id, email } = req.params;
+      await app.objection.models.user.query()
+        .findById(id)
+        .patch({ email });
+
+      app.reverse('root');
     });
 };
