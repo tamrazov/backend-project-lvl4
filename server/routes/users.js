@@ -28,5 +28,11 @@ export default (app) => {
       }
 
       return reply;
+    })
+    .get('/users/:id', async (req, reply) => {
+      const { id } = req.params;
+      const user = await app.objection.models.user.query().findById(id);
+
+      reply.render('users/user', { user });
     });
 };

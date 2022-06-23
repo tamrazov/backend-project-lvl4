@@ -7,6 +7,8 @@ import init from '../server/plugin.js';
 import encrypt from '../server/lib/secure.cjs';
 import { getTestData, prepareData } from './helpers/index.js';
 
+// @ts-ignore
+
 describe('test users CRUD', () => {
   let app;
   let knex;
@@ -30,7 +32,7 @@ describe('test users CRUD', () => {
   beforeEach(async () => {
   });
 
-  it('index', async () => {
+  test('index', async () => {
     const response = await app.inject({
       method: 'GET',
       url: app.reverse('users'),
@@ -39,7 +41,7 @@ describe('test users CRUD', () => {
     expect(response.statusCode).toBe(200);
   });
 
-  it('new', async () => {
+  test('new', async () => {
     const response = await app.inject({
       method: 'GET',
       url: app.reverse('newUser'),
@@ -48,7 +50,7 @@ describe('test users CRUD', () => {
     expect(response.statusCode).toBe(200);
   });
 
-  it('create', async () => {
+  test('create', async () => {
     const params = testData.users.new;
     const response = await app.inject({
       method: 'POST',
