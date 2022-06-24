@@ -4,8 +4,8 @@ import i18next from 'i18next';
 import _ from 'lodash';
 
 export default (app) => ({
-  route(name) {
-    return app.reverse(name);
+  route(name, args = {}) {
+    return app.reverse(name, args);
   },
   t(key) {
     return i18next.t(key);
@@ -25,8 +25,8 @@ export default (app) => ({
         throw new Error(`Unknown flash type: '${type}'`);
     }
   },
-  formatDate(str) {
+  formatDate(str, options = {}) {
     const date = new Date(str);
-    return date.toLocaleString();
+    return date.toLocaleString(undefined, options);
   },
 });

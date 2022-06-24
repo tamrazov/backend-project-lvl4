@@ -69,6 +69,25 @@ describe('test users CRUD', () => {
     expect(user).toMatchObject(expected);
   });
 
+  // test('delete', async () => {
+  //   const params = testData.users.new;
+  //   const response = await app.inject({
+  //     method: 'POST',
+  //     url: app.reverse('users'),
+  //     payload: {
+  //       data: params,
+  //     },
+  //   });
+
+  //   expect(response.statusCode).toBe(302);
+  //   const expected = {
+  //     ..._.omit(params, 'password'),
+  //     passwordDigest: encrypt(params.password),
+  //   };
+  //   const user = await models.user.query().findOne({ email: params.email });
+  //   expect(user).toMatchObject(expected);
+  // });
+
   afterEach(async () => {
     // Пока Segmentation fault: 11
     // после каждого теста откатываем миграции

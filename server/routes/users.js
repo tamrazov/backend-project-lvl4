@@ -35,12 +35,24 @@ export default (app) => {
 
       reply.render('users/user', { user });
     })
-    .post('/users/:id', async (req) => {
-      const { id, email } = req.params;
-      await app.objection.models.user.query()
-        .findById(id)
-        .patch({ email });
+    .post('/users/:id', { name: 'editUser' }, async (req, reply) => {
+      const users = await app.objection.models.user.query();
+      // await app.objection.models.user.query()
+      //   .findById(id)
+      //   .patch({ email });
 
-      app.reverse('root');
+      reply.render('users/index', { users });
+      return reply;
+    })
+    .delete('/users/:id', { name: 'deleteUser' }, async (req, reply) => {
+      const { id } = req.params;
+
+      try {
+        await app.objection.models.user.query().findById(id).delete();
+        req.flash('success', i18next.t('flash.users.delete.success'));
+      } catch (error) {
+        req.flash('info', i18next.t('flash.users.delete.error'));
+      }
+      return reply.redirect(app.reverse('root'));
     });
 };
