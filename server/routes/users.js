@@ -42,6 +42,7 @@ export default (app) => {
       //   .patch({ email });
 
       reply.render('users/index', { users });
+
       return reply;
     })
     .delete('/users/:id', { name: 'deleteUser' }, async (req, reply) => {
@@ -53,6 +54,7 @@ export default (app) => {
       } catch (error) {
         req.flash('info', i18next.t('flash.users.delete.error'));
       }
+
       return reply.redirect(app.reverse('root'));
     });
 };
