@@ -85,6 +85,26 @@ describe('test users CRUD', () => {
     expect(user).toBeUndefined();
   });
 
+  test('edit', async () => {
+    const params = testData.users.editing;
+    const { email } = testData.users.existing;
+    const { id } = await models.user.query().findOne({ email });
+
+    const response = await app.inject({
+      method: 'POST',
+      url: app.reverse('editUser', { id }),
+      payload: {
+        data: params,
+      },
+    });
+
+    expect(response.statusCode).toBe(200);
+
+    // const user = await models.user.query().findById(id);
+
+    // expect(user).toBeUndefined();
+  });
+
   afterEach(async () => {
     // Пока Segmentation fault: 11
     // после каждого теста откатываем миграции

@@ -36,14 +36,14 @@ export default (app) => {
       reply.render('users/user', { user });
     })
     .post('/users/:id', { name: 'editUser' }, async (req, reply) => {
+      const { id, email, password } = req.params;
+      await app.objection.models.user.query()
+        .findById(id)
+        .patch({ email, password });
+
       const users = await app.objection.models.user.query();
-      // await app.objection.models.user.query()
-      //   .findById(id)
-      //   .patch({ email });
 
-      reply.render('users/index', { users });
-
-      return reply;
+      return reply.render('users/index', { users });
     })
     .delete('/users/:id', { name: 'deleteUser' }, async (req, reply) => {
       const { id } = req.params;
