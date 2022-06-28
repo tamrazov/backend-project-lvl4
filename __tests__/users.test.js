@@ -87,7 +87,7 @@ describe('test users CRUD', () => {
 
   test('edit', async () => {
     const params = testData.users.editing;
-    const { email } = testData.users.existing;
+    const { email } = testData.users.existing2;
     const { id } = await models.user.query().findOne({ email });
 
     const response = await app.inject({
@@ -99,10 +99,6 @@ describe('test users CRUD', () => {
     });
 
     expect(response.statusCode).toBe(200);
-
-    // const user = await models.user.query().findById(id);
-
-    // expect(user).toBeUndefined();
   });
 
   afterEach(async () => {

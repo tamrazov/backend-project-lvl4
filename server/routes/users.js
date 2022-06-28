@@ -36,10 +36,15 @@ export default (app) => {
       reply.render('users/user', { user });
     })
     .post('/users/:id', { name: 'editUser' }, async (req, reply) => {
-      const { id, email, password } = req.params;
-      await app.objection.models.user.query()
-        .findById(id)
-        .patch({ email, password });
+      // const { id } = req.params;
+      // const { email, password } = req.body.data;
+      // const User = await app.objection.models.user.query().findById(id);
+
+      // try {
+      //   await User.query().insert({ email, password });
+      // } catch (error) {
+      //   throw error;
+      // }
 
       const users = await app.objection.models.user.query();
 
