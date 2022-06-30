@@ -1,23 +1,18 @@
-import _ from 'lodash';
 import fastify from 'fastify';
-
 import init from '../server/plugin.js';
-import encrypt from '../server/lib/secure.cjs';
 import { getTestData, prepareData } from './helpers/index.js';
 
 // @ts-ignore
 
-describe.only('test statuses CRUD', () => {
+describe('test statuses CRUD', () => {
   let app;
   let knex;
-  let models;
   const testData = getTestData();
 
   beforeAll(async () => {
     app = fastify();
     await init(app);
     knex = app.objection.knex;
-    models = app.objection.models;
 
     // TODO: пока один раз перед тестами
     // тесты не должны зависеть друг от друга
@@ -39,13 +34,13 @@ describe.only('test statuses CRUD', () => {
     expect(response.statusCode).toBe(200);
   });
 
-  test('create', async () => {
+  test('create page', async () => {
     const response = await app.inject({
       method: 'GET',
-      url: app.reverse('createStatus'),
+      url: app.reverse('newStatus'),
     });
 
-    expect(response.statusCode).toBe(200);
+    expect(response.statusCode).toBe(302);
   });
 
   test('edit', async () => {
@@ -55,5 +50,24 @@ describe.only('test statuses CRUD', () => {
     });
 
     expect(response.statusCode).toBe(200);
+  });
+
+  test('create', async () => {
+    const params = testData.statuses.new;
+    const response = await app.inject({
+      method: 'POST',
+      url: app.reverse('createStatus'),
+      payload: {
+        data: params,
+      },
+    });
+
+    expect(response.statusCode).toBe(302);
+    // const expected = {
+    //   ..._.omit(params, 'password'),
+    //   passwordDigest: encrypt(params.password),
+    // };
+    // const user = await models.user.query().findOne({ email: params.email });
+    // expect(user).toMatchObject(expected);
   });
 });

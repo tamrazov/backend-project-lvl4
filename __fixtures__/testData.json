@@ -18,5 +18,10 @@
       "email": "lawrence.kulas78@outlook.com",
       "password": "OOO6AvLIQL1cbzrre"
     }
+  },
+  "statuses": {
+    "new": {
+      "name": "В процессе"
+    }
   }
 }

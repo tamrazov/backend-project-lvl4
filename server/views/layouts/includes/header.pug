@@ -11,6 +11,8 @@ header
           ul.navbar-nav.mr-auto
             li.nav-item
               a.nav-link(href=route('users'))= t('layouts.application.users')
+            li.nav-item
+              a.nav-link(href=route('allStatuses'))= t('layouts.application.statuses')
         ul.navbar-nav
           if isAuthenticated()
             li.nav-item

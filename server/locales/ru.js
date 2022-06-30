@@ -28,6 +28,7 @@ export default {
     layouts: {
       application: {
         users: 'Пользователи',
+        statuses: 'Статусы',
         signIn: 'Вход',
         signUp: 'Регистрация',
         signOut: 'Выход',
