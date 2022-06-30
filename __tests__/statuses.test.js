@@ -7,14 +7,14 @@ import { getTestData, prepareData } from './helpers/index.js';
 
 // @ts-ignore
 
-describe('test statuses CRUD', () => {
+describe.only('test statuses CRUD', () => {
   let app;
   let knex;
   let models;
   const testData = getTestData();
 
   beforeAll(async () => {
-    app = fastify({ logger: { prettyPrint: true } });
+    app = fastify();
     await init(app);
     knex = app.objection.knex;
     models = app.objection.models;
@@ -30,10 +30,28 @@ describe('test statuses CRUD', () => {
   beforeEach(async () => {
   });
 
-  test.only('index', async () => {
+  test('index', async () => {
     const response = await app.inject({
       method: 'GET',
-      url: app.reverse('statuses'),
+      url: app.reverse('allStatuses'),
+    });
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test('create', async () => {
+    const response = await app.inject({
+      method: 'GET',
+      url: app.reverse('createStatus'),
+    });
+
+    expect(response.statusCode).toBe(200);
+  });
+
+  test('edit', async () => {
+    const response = await app.inject({
+      method: 'GET',
+      url: app.reverse('editStatus', { id: 1 }),
     });
 
     expect(response.statusCode).toBe(200);

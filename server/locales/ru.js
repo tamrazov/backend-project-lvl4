@@ -56,6 +56,9 @@ export default {
           more: 'Узнать Больше',
         },
       },
+      statuses: {
+        name: 'Имя',
+      },
     },
     formNames: {
       email: 'почтовый адрес',
