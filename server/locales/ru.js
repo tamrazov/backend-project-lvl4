@@ -63,6 +63,9 @@ export default {
           submit: 'Создать',
           signUp: 'Регистрация',
         },
+        edit: {
+          title: 'Редактирование статуса',
+        },
       },
     },
     formNames: {
