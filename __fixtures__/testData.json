@@ -21,7 +21,19 @@
   },
   "statuses": {
     "new": {
+      "name": "новый"
+    },
+    "existing": {
       "name": "В процессе"
+    },
+    "existing2": {
+      "name": "на тестировании"
+    },
+    "deleting": {
+      "name": "завершен"
+    },
+    "editing": {
+      "name": "завершен"
     }
   }
 }

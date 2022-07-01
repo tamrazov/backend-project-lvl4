@@ -59,12 +59,17 @@ export default {
       },
       statuses: {
         name: 'Имя',
+        new: {
+          submit: 'Создать',
+          signUp: 'Регистрация',
+        },
       },
     },
     formNames: {
       email: 'почтовый адрес',
       password: 'пароль',
       createdAt: 'дата создания',
+      name: 'название',
     },
   },
 };

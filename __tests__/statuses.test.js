@@ -7,12 +7,14 @@ import { getTestData, prepareData } from './helpers/index.js';
 describe('test statuses CRUD', () => {
   let app;
   let knex;
+  let models;
   const testData = getTestData();
 
   beforeAll(async () => {
     app = fastify();
     await init(app);
     knex = app.objection.knex;
+    models = app.objection.models;
 
     // TODO: пока один раз перед тестами
     // тесты не должны зависеть друг от друга
@@ -43,10 +45,10 @@ describe('test statuses CRUD', () => {
     expect(response.statusCode).toBe(302);
   });
 
-  test('edit', async () => {
+  test('edit page', async () => {
     const response = await app.inject({
       method: 'GET',
-      url: app.reverse('editStatus', { id: 1 }),
+      url: app.reverse('editPageStatus', { id: 1 }),
     });
 
     expect(response.statusCode).toBe(200);
@@ -69,5 +71,37 @@ describe('test statuses CRUD', () => {
     // };
     // const user = await models.user.query().findOne({ email: params.email });
     // expect(user).toMatchObject(expected);
+  });
+
+  test('delete', async () => {
+    const name = testData.statuses.deleting;
+    const { id } = await models.status.query().findOne({ name });
+
+    const response = await app.inject({
+      method: 'DELETE',
+      url: app.reverse('deleteStatus', { id }),
+    });
+
+    expect(response.statusCode).toBe(302);
+
+    // const status = await models.status.query().findById(id);
+
+    // expect(status).toBeUndefined();
+  });
+
+  test('edit', async () => {
+    const params = testData.statuses.editing;
+    const { name } = testData.statuses.existing2;
+    const { id } = await models.status.query().findOne({ name });
+
+    const response = await app.inject({
+      method: 'POST',
+      url: app.reverse('editStatus', { id }),
+      payload: {
+        data: params,
+      },
+    });
+
+    expect(response.statusCode).toBe(200);
   });
 });

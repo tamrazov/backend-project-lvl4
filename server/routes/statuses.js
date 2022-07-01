@@ -9,9 +9,10 @@ export default async (app) => {
     .get('/statuses/new', { name: 'newStatus' }, async (req, reply) => {
       // const status = new app.objection.models.status();
 
-      reply.redirect(app.reverse('allStatuses'));
+      reply.render('statuses/new');
+      return reply;
     })
-    .get('/statuses/:id/edit', { name: 'editStatus' }, async (req, reply) => {
+    .get('/statuses/:id/edit', { name: 'editPageStatus' }, async (req, reply) => {
       // const { id } = req.params;
       const statuses = await app.objection.models.status.query();
 
@@ -33,5 +34,32 @@ export default async (app) => {
       // }
 
       return reply;
+    })
+    .post('/statuses/:id', { name: 'editStatus' }, async (req, reply) => {
+      // const { id } = req.params;
+      // const { email, password } = req.body.data;
+      // const User = await app.objection.models.user.query().findById(id);
+
+      // try {
+      //   await User.query().insert({ email, password });
+      // } catch (error) {
+      //   throw error;
+      // }
+
+      const users = await app.objection.models.user.query();
+
+      return reply.render('users/index', { users });
+    })
+    .delete('/statuses/:id', { name: 'deleteStatus' }, async (req, reply) => {
+      const { id } = req.params;
+
+      try {
+        await app.objection.models.user.query().findById(id).delete();
+        // req.flash('success', i18next.t('flash.users.delete.success'));
+      } catch (error) {
+        // req.flash('info', i18next.t('flash.users.delete.error'));
+      }
+
+      return reply.redirect(app.reverse('root'));
     });
 };
