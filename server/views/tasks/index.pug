@@ -1,0 +1,15 @@
+extends ../layouts/application.pug
+
+block content
+  table.table.table-striped
+    thead
+      tr
+        th= t('views.tasks.id')
+        th= t('views.tasks.name')
+        th= t('views.tasks.email')
+        th= t('views.tasks.createdAt')
+    tbody
+      each task in tasks
+        tr
+          td= task.id
+          td= task.name

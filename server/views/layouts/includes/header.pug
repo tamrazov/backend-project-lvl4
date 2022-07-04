@@ -11,9 +11,11 @@ header
           ul.navbar-nav.mr-auto
             li.nav-item
               a.nav-link(href=route('users'))= t('layouts.application.users')
-            li.nav-item
-              a.nav-link(href=route('allStatuses'))= t('layouts.application.statuses')
         ul.navbar-nav
+          li.nav-item
+            a.nav-link(href=route('tasks'))= t('layouts.application.tasks')
+          li.nav-item
+            a.nav-link(href=route('allStatuses'))= t('layouts.application.statuses')
           if isAuthenticated()
             li.nav-item
               +buttonTo(route('session'), 'delete')(class="btn nav-link" value=t('layouts.application.signOut'))

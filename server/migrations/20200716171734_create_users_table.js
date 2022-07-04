@@ -19,9 +19,9 @@ export const up = (knex) => (
     table.increments('id').primary();
     table.string('name');
     table.string('description');
-    table.increments('statusId').primary();
-    table.increments('creatorId').primary();
-    table.increments('executorId').primary();
+    table.integer('statusId').unsigned().notNullable();
+    table.integer('creatorId').unsigned().notNullable();
+    table.integer('executorId').unsigned().notNullable();
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.timestamp('updated_at').defaultTo(knex.fn.now());
   })

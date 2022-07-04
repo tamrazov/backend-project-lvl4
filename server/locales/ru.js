@@ -2,7 +2,7 @@
 
 export default {
   translation: {
-    appName: 'Home',
+    appName: 'Менеджер задач',
     flash: {
       session: {
         create: {
@@ -28,6 +28,7 @@ export default {
     layouts: {
       application: {
         users: 'Пользователи',
+        tasks: 'Задачи',
         statuses: 'Статусы',
         signIn: 'Вход',
         signUp: 'Регистрация',
