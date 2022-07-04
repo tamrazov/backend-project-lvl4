@@ -30,7 +30,7 @@ describe('test statuses CRUD', () => {
   test('index', async () => {
     const response = await app.inject({
       method: 'GET',
-      url: app.reverse('allStatuses'),
+      url: app.reverse('statuses'),
     });
 
     expect(response.statusCode).toBe(200);
