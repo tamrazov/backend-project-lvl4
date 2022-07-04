@@ -3,6 +3,7 @@
 export const up = (knex) => (
   knex.schema.createTable('users', (table) => {
     table.increments('id').primary();
+    table.string('name');
     table.string('email');
     table.string('password_digest');
     table.timestamp('created_at').defaultTo(knex.fn.now());
@@ -11,6 +12,16 @@ export const up = (knex) => (
   .createTable('statuses', (table) => {
     table.increments('id').primary();
     table.string('name');
+    table.timestamp('created_at').defaultTo(knex.fn.now());
+    table.timestamp('updated_at').defaultTo(knex.fn.now());
+  })
+  .createTable('tasks', (table) => {
+    table.increments('id').primary();
+    table.string('name');
+    table.string('description');
+    table.increments('statusId').primary();
+    table.increments('creatorId').primary();
+    table.increments('executorId').primary();
     table.timestamp('created_at').defaultTo(knex.fn.now());
     table.timestamp('updated_at').defaultTo(knex.fn.now());
   })

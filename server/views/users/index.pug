@@ -5,12 +5,14 @@ block content
     thead
       tr
         th= t('views.users.id')
+        th= t('views.users.name')
         th= t('views.users.email')
         th= t('views.users.createdAt')
     tbody
       each user in users
         tr
           td= user.id
+          td= user.name
           td
            a(href=`users/${user.id}`)= user.email
           td= formatDate(user.createdAt)
