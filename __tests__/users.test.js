@@ -60,13 +60,13 @@ describe('test users CRUD', () => {
       },
     });
 
-    expect(response.statusCode).toBe(302);
+    expect(response.statusCode).toBe(200);
     const expected = {
       ..._.omit(params, 'password'),
       passwordDigest: encrypt(params.password),
     };
-    const user = await models.user.query().findOne({ email: params.email });
-    expect(user).toMatchObject(expected);
+    const user = await models.user.query();
+    expect(user).toBe(expected);
   });
 
   test('delete', async () => {
@@ -98,7 +98,10 @@ describe('test users CRUD', () => {
       },
     });
 
+    const editingUser = await models.user.query().findById(id);
+
     expect(response.statusCode).toBe(200);
+    expect(params.email).toBe(editingUser.email);
   });
 
   afterEach(async () => {
