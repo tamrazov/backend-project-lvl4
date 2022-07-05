@@ -1,0 +1,9 @@
+extends ../layouts/application.pug
+
+block header
+  = t('views.tasks.new.signUp')
+
+block content
+  +formFor()(action=route('createTask') method='post')
+    +input(task, 'name', errors)(type="text")
+    +submit(task)(value=t('views.tasks.new.submit'))
