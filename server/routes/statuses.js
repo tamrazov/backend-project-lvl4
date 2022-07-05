@@ -4,7 +4,7 @@ import i18next from 'i18next';
 
 export default async (app) => {
   app
-    .get('/statuses', { name: 'allStatuses' }, async (req, reply) => {
+    .get('/statuses', { name: 'statuses' }, async (req, reply) => {
       const statuses = await app.objection.models.status.query();
 
       reply.render('statuses/index', { statuses });
@@ -16,18 +16,9 @@ export default async (app) => {
       reply.render('statuses/new');
       return reply;
     })
-    .get('/statuses/:id/edit', { name: 'editPageStatus' }, async (req, reply) => {
+    .get('/statuses/:id/edit', { name: 'statuses/edit' }, async (req, reply) => {
       const { id } = req.params;
       const status = await app.objection.models.status.query().findById(id);
-
-      reply.render('statuses/edit', { status });
-      return reply;
-    })
-    .post('/statuses/:id', { name: 'editStatus' }, async (req, reply) => {
-      const { id } = req.params;
-      // const { name } = req.body.data;
-      const status = await app.objection.models.status.query().findById(id);
-      req.flash('info', i18next.t('flash.users.create.success'));
 
       reply.render('statuses/edit', { status });
       return reply;
@@ -48,26 +39,22 @@ export default async (app) => {
 
       return reply;
     })
-    // .post('/statuses/:id', { name: 'editStatus' }, async (req, reply) => {
-    //   const { id } = req.params;
-    //   const { email, password } = req.body.data;
-    //   const User = await app.objection.models.user.query().findById(id);
+    .post('/statuses/:id', { name: 'editStatus' }, async (req, reply) => {
+      const { id } = req.params;
+      const { name } = req.body.data;
+      const status = await app.objection.models.status.query().findById(id);
 
-  //   try {
-  //     await User.query().insert({ email, password });
-  //   } catch (error) {
-  //     throw error;
-  //   }
+      await status.$query().patch({ name });
 
-  //   const users = await app.objection.models.user.query();
+      const statuses = await app.objection.models.status.query();
 
-    //   return reply.render('users/index', { users });
-    // })
+      return reply.render('statuses/index', { statuses });
+    })
     .delete('/statuses/:id', { name: 'deleteStatus' }, async (req, reply) => {
       const { id } = req.params;
 
       try {
-        await app.objection.models.user.query().findById(id).delete();
+        await app.objection.models.status.query().findById(id).delete();
         req.flash('success', i18next.t('flash.users.delete.success'));
       } catch (error) {
         req.flash('info', i18next.t('flash.users.delete.error'));

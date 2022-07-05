@@ -36,19 +36,19 @@ describe('test statuses CRUD', () => {
     expect(response.statusCode).toBe(200);
   });
 
-  test('create page', async () => {
+  test('new', async () => {
     const response = await app.inject({
       method: 'GET',
       url: app.reverse('newStatus'),
     });
 
-    expect(response.statusCode).toBe(302);
+    expect(response.statusCode).toBe(200);
   });
 
   test('edit page', async () => {
     const response = await app.inject({
       method: 'GET',
-      url: app.reverse('editPageStatus', { id: 1 }),
+      url: app.reverse('statuses/edit', { id: 1 }),
     });
 
     expect(response.statusCode).toBe(200);
@@ -64,35 +64,27 @@ describe('test statuses CRUD', () => {
       },
     });
 
-    expect(response.statusCode).toBe(302);
-    // const expected = {
-    //   ..._.omit(params, 'password'),
-    //   passwordDigest: encrypt(params.password),
-    // };
-    // const user = await models.user.query().findOne({ email: params.email });
-    // expect(user).toMatchObject(expected);
+    expect(response.statusCode).toBe(200);
+    const status = await models.status.query().findOne({ name: params.name });
+    expect(status).toMatchObject(params);
   });
 
   test('delete', async () => {
-    const name = testData.statuses.deleting;
-    const { id } = await models.status.query().findOne({ name });
-
+    const { id } = testData.statuses.deleting;
     const response = await app.inject({
       method: 'DELETE',
       url: app.reverse('deleteStatus', { id }),
     });
 
-    expect(response.statusCode).toBe(302);
+    expect(response.statusCode).toBe(200);
 
-    // const status = await models.status.query().findById(id);
-
-    // expect(status).toBeUndefined();
+    const status = await models.status.query().findById(id);
+    expect(status).toBeUndefined();
   });
 
   test('edit', async () => {
     const params = testData.statuses.editing;
-    const { name } = testData.statuses.existing2;
-    const { id } = await models.status.query().findOne({ name });
+    const { id } = testData.statuses.existing2;
 
     const response = await app.inject({
       method: 'POST',
@@ -102,6 +94,9 @@ describe('test statuses CRUD', () => {
       },
     });
 
+    const status = await models.status.query().findById(id);
+
     expect(response.statusCode).toBe(200);
+    expect(status.name).toBe(params.name);
   });
 });
