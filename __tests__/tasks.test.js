@@ -35,13 +35,4 @@ describe('test tasks CRUD', () => {
 
     expect(response.statusCode).toBe(200);
   });
-
-  test('new tasks page', async () => {
-    const response = await app.inject({
-      method: 'GET',
-      url: app.reverse('tasks/new'),
-    });
-
-    expect(response.statusCode).toBe(200);
-  });
 });

@@ -8,7 +8,7 @@ export default (app) => {
       reply.render('tasks/index', { tasks });
       return reply;
     })
-    .get('/tasks', { name: 'newTask' }, async (req, reply) => {
+    .get('/tasks/new', { name: 'newTask' }, async (req, reply) => {
       const task = new app.objection.models.task();
       reply.render('tasks/new', { task });
     })
@@ -24,7 +24,6 @@ export default (app) => {
 
       reply.render('tasks/task', { task });
     })
-
     .post('/tasks/new', async (req, reply) => {
       const task = new app.objection.models.task();
       task.$set(req.body.data);
