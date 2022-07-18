@@ -11,4 +11,9 @@ export default async (app) => {
       reply.render('labels/index', { labels });
       return reply;
     })
+    .get('/labels/new', { name: 'newLabel' }, async (req, reply) => {
+
+      reply.render('statuses/new');
+      return reply;
+    })
 };

@@ -65,8 +65,11 @@ describe('test users CRUD', () => {
       ..._.omit(params, 'password'),
       passwordDigest: encrypt(params.password),
     };
-    const user = await models.user.query();
-    expect(user).toBe(expected);
+    const user = await models.user.query().findOne({ email: params.email });
+    const currentUser = {
+      ..._.omit(user, 'id', 'createdAt', 'updatedAt')
+    }
+    expect(currentUser).toStrictEqual(expected);
   });
 
   test('delete', async () => {
