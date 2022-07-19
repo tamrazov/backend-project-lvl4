@@ -13,7 +13,7 @@ export default async (app) => {
     })
     .get('/labels/new', { name: 'newLabel' }, async (req, reply) => {
 
-      reply.render('statuses/new');
+      reply.render('labels/new');
       return reply;
     })
 };
