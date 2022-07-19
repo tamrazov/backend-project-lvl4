@@ -26,10 +26,16 @@ export default async (app) => {
         req.flash('info', i18next.t('flash.label.create.success'));
         reply.redirect(app.reverse('labels'));
       } catch (err) {
+        console.log(JSON.stringify(err.data))
         req.flash('error', i18next.t('flash.label.create.error'));
         reply.render('labels/new', { label, errors: err.data });
       }
 
       return reply;
     })
-};
+    .get('/labels/:id/edit', async (req, reply) => {
+      const { id } = req.params;
+      const user = await app.objection.models.user.query().findById(id);
+
+      reply.render('users/user', { user });
+    })};
