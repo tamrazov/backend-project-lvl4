@@ -1,9 +1,9 @@
 extends ../layouts/application.pug
 
 block header
-  = t('views.labels.new')
+  h1=t('views.labels.new.title')
 
 block content
-  +formFor()(action=route('users') method='post')
+  +formFor()(action=route('labels') method='post')
     +input(user, 'name', errors)(type="text")
     +submit(user)(value=t('views.labels.new.create'))

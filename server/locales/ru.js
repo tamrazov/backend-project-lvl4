@@ -69,6 +69,16 @@ export default {
           title: 'Редактирование статуса',
         },
       },
+      labels: {
+        name: 'Имя',
+        new: {
+          title: 'Создание метки',
+          create: 'Создать',
+        },
+        edit: {
+          title: 'Редактирование статуса',
+        },
+      },
     },
     formNames: {
       email: 'почтовый адрес',

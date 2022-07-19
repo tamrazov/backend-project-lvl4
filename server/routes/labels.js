@@ -16,7 +16,7 @@ export default async (app) => {
       reply.render('labels/new');
       return reply;
     })
-    .post('/users', async (req, reply) => {
+    .post('/labels', async (req, reply) => {
       const label = new app.objection.models.label();
       label.$set(req.body.data);
 
@@ -24,10 +24,10 @@ export default async (app) => {
         const validLabel = await app.objection.models.label.fromJson(req.body.data);
         await app.objection.models.label.query().insert(validLabel);
         req.flash('info', i18next.t('flash.label.create.success'));
-        reply.redirect(app.reverse('root'));
+        reply.redirect(app.reverse('labels'));
       } catch (err) {
         req.flash('error', i18next.t('flash.label.create.error'));
-        reply.render('label/new', { label, errors: err.data });
+        reply.render('labels/new', { label, errors: err.data });
       }
 
       return reply;
