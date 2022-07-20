@@ -1,4 +1,13 @@
 extends ../layouts/application.pug
 
 block content
-  div Labels
+  table.table.table-striped
+    thead
+      tr
+        th= t('views.labels.id')
+        th= t('views.labels.name')
+    tbody
+      each label in labels
+        tr
+          td= label.id
+          td= label.name
