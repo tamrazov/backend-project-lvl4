@@ -77,6 +77,8 @@ export default {
       labels: {
         title: 'Метки',
         name: 'Имя',
+        id: 'ID',
+        dateCreate: 'Дата создания',
         new: {
           name: 'Наименование',
           title: 'Создание метки',

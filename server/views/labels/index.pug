@@ -2,7 +2,7 @@ extends ../layouts/application.pug
 
 block header
   h1=t('views.labels.title')
-  +formFor()(action=route('newLabel') method='post')
+  +formFor()(action=route('newLabel') method='get')
     +submit(task)(value=t('views.labels.new.create'))
 
 block content
@@ -11,8 +11,10 @@ block content
       tr
         th= t('views.labels.id')
         th= t('views.labels.name')
+        th= t('views.labels.dateCreate')
     tbody
       each label in labels
         tr
           td= label.id
+          td= label.name
           td= label.name

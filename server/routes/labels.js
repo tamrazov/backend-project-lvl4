@@ -16,7 +16,7 @@ export default async (app) => {
       reply.render('labels/new');
       return reply;
     })
-    .post('/labels', async (req, reply) => {
+    .post('/labels', { name: 'createLabel' }, async (req, reply) => {
       const label = new app.objection.models.label();
       label.$set(req.body.data);
 
