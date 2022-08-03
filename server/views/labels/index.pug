@@ -1,5 +1,10 @@
 extends ../layouts/application.pug
 
+block header
+  h1=t('views.labels.title')
+  +formFor()(action=route('newLabel') method='post')
+    +submit(task)(value=t('views.labels.new.create'))
+
 block content
   table.table.table-striped
     thead

@@ -34,6 +34,7 @@ export default {
         users: 'Пользователи',
         tasks: 'Задачи',
         statuses: 'Статусы',
+        labels: 'Метки',
         signIn: 'Вход',
         signUp: 'Регистрация',
         signOut: 'Выход',
@@ -74,11 +75,12 @@ export default {
         },
       },
       labels: {
+        title: 'Метки',
         name: 'Имя',
         new: {
           name: 'Наименование',
           title: 'Создание метки',
-          create: 'Создать',
+          create: 'Создать метку',
         },
         edit: {
           title: 'Редактирование статуса',
