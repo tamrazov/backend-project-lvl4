@@ -18,3 +18,7 @@ block content
           td= label.id
           td= label.name
           td= label.name
+          td.d-flex
+            +buttonTo()(class="btn btn-primary" value=t('layouts.application.signOut'))
+            +buttonTo()(class="btn btn-danger" value=t('layouts.application.signOut'))
+
