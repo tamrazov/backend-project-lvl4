@@ -3,6 +3,11 @@
 export default {
   translation: {
     appName: 'Менеджер задач',
+    buttons: {
+      change: 'Изменить',
+      delete: 'Удалить',
+      edit: 'Редактировать',
+    },
     flash: {
       session: {
         create: {

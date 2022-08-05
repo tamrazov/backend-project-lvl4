@@ -35,7 +35,7 @@ export default async (app) => {
     })
     .get('/labels/:id/edit', async (req, reply) => {
       const { id } = req.params;
-      const user = await app.objection.models.user.query().findById(id);
+      const label = await app.objection.models.label.query().findById(id);
 
-      reply.render('users/user', { user });
+      reply.render('labels/edit', { label });
     })};
