@@ -40,5 +40,15 @@
       "id": 5,
       "name": "завершен"
     }
+  },
+  "labels": {
+    "new": {
+      "id": 1,
+      "name": "first"
+    },
+    "deleting": {
+      "id": 1,
+      "name": "first"
+    }
   }
 }
