@@ -19,6 +19,6 @@ block content
           td= label.name
           td= label.name
           td.d-flex
-            +buttonTo()(class="btn btn-primary" value=t('buttons.change'))
-            +buttonTo()(class="btn btn-danger" value=t('buttons.delete'))
+            +buttonTo(route('editLabel', { id: label.id}), 'post')(class="btn btn-primary" value=t('buttons.change'))
+            +buttonTo(route('deleteLabel', { id: label.id}), 'delete')(class="btn btn-danger" value=t('buttons.delete'))
 

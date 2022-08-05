@@ -38,4 +38,32 @@ export default async (app) => {
       const label = await app.objection.models.label.query().findById(id);
 
       reply.render('labels/edit', { label });
-    })};
+    })
+    .post('/labels/:id/edit', { name: 'editLabel' }, async (req, reply) => {
+      const { id } = req.params;
+      console.log(req.body.data, 'req.body.data')
+      const { name } = req.body.data;
+      const label = await app.objection.models.label.query().findById(id);
+
+      await label.$query().patch({ name });
+
+      const labels = await app.objection.models.label.query();
+
+      return reply.render('labels/index', { labels });
+    })
+    .delete('/labels/:id', { name: 'deleteLabel' }, async (req, reply) => {
+      const { id } = req.params;
+
+      try {
+        await app.objection.models.label.query().findById(id).delete();
+        req.flash('success', i18next.t('flash.label.delete.success'));
+      } catch (error) {
+        req.flash('info', i18next.t('flash.label.delete.error'));
+      }
+
+      const labels = await app.objection.models.label.query();
+
+      reply.render('labels/index', { labels });
+      return reply;
+    });
+}
