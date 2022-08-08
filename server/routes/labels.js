@@ -33,13 +33,13 @@ export default async (app) => {
 
       return reply;
     })
-    .get('/labels/:id/edit', async (req, reply) => {
+    .get('/labels/:id/edit', { name: 'editPage' }, async (req, reply) => {
       const { id } = req.params;
       const label = await app.objection.models.label.query().findById(id);
 
       reply.render('labels/edit', { label });
     })
-    .post('/labels/:id/edit', { name: 'editLabel' }, async (req, reply) => {
+    .patch('/labels/:id/edit', { name: 'editLabel' }, async (req, reply) => {
       const { id } = req.params;
       console.log(req.body.data, 'req.body.data')
       const { name } = req.body.data;
@@ -49,7 +49,7 @@ export default async (app) => {
 
       const labels = await app.objection.models.label.query();
 
-      return reply.render('labels/index', { labels });
+      return reply.render('labels/edit', { label });
     })
     .delete('/labels/:id', { name: 'deleteLabel' }, async (req, reply) => {
       const { id } = req.params;
