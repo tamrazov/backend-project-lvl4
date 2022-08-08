@@ -82,21 +82,21 @@ describe('test labels CRUD', () => {
     expect(label).toBeUndefined();
   });
 
-  // test('edit', async () => {
-  //   const params = testData.statuses.editing;
-  //   const { id } = testData.statuses.existing2;
+  test('edit', async () => {
+    const params = testData.labels.editing;
+    const { id } = testData.labels.existing2;
 
-  //   const response = await app.inject({
-  //     method: 'POST',
-  //     url: app.reverse('editStatus', { id }),
-  //     payload: {
-  //       data: params,
-  //     },
-  //   });
+    const response = await app.inject({
+      method: 'POST',
+      url: app.reverse('editLabel', { id }),
+      payload: {
+        data: params,
+      },
+    });
 
-  //   const status = await models.status.query().findById(id);
+    const status = await models.status.query().findById(id);
 
-  //   expect(response.statusCode).toBe(200);
-  //   expect(status.name).toBe(params.name);
-  // });
+    expect(response.statusCode).toBe(200);
+    expect(status.name).toBe(params.name);
+  });
 });
