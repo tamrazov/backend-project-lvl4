@@ -4,6 +4,6 @@ block header
   h1=t('views.labels.edit.title')
 
 block content
-  +formFor()(action=route('labels') method='post')
+  +formFor()(action=route('editLabel', { id: label.id }) method='post')
     +input(label, 'name', errors)(type="text" placeholder=t('views.labels.new.name'))
     +submit(label)(value=t('buttons.edit'))

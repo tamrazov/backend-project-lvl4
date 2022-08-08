@@ -39,17 +39,15 @@ export default async (app) => {
 
       reply.render('labels/edit', { label });
     })
-    .patch('/labels/:id/edit', { name: 'editLabel' }, async (req, reply) => {
+    .post('/labels/:id', { name: 'editLabel' }, async (req, reply) => {
       const { id } = req.params;
-      console.log(req.body.data, 'req.body.data')
       const { name } = req.body.data;
       const label = await app.objection.models.label.query().findById(id);
 
       await label.$query().patch({ name });
 
       const labels = await app.objection.models.label.query();
-
-      return reply.render('labels/edit', { label });
+      return reply.render('labels/index', { labels });
     })
     .delete('/labels/:id', { name: 'deleteLabel' }, async (req, reply) => {
       const { id } = req.params;
