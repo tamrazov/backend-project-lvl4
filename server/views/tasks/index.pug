@@ -1,5 +1,10 @@
 extends ../layouts/application.pug
 
+block header
+  h1=t('views.tasks.title')
+  +formFor()(action=route('newTask') method='get')
+    +submit(task)(value=t('views.tasks.new.create'))
+
 block content
   table.table.table-striped
     thead

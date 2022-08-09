@@ -4,6 +4,7 @@ export default (app) => {
   app
     .get('/tasks', { name: 'tasks' }, async (req, reply) => {
       const tasks = await app.objection.models.task.query();
+      console.log(tasks)
 
       reply.render('tasks/index', { tasks });
       return reply;
@@ -24,7 +25,7 @@ export default (app) => {
 
       reply.render('tasks/task', { task });
     })
-    .post('/tasks/new', async (req, reply) => {
+    .post('/tasks/new', { name: 'createTask' }, async (req, reply) => {
       const task = new app.objection.models.task();
       task.$set(req.body.data);
 

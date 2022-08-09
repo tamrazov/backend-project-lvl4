@@ -93,6 +93,19 @@ export default {
           title: 'Редактирование статуса',
         },
       },
+      tasks: {
+        id: "ID",
+        name: 'Наименование',
+        email: 'asdl',
+        createdAt: '  adasd',
+        title: 'Задачи',
+        dateCreate: 'Дата создания',
+        new: {
+          name: 'Наименование',
+          title: 'Создание задачи',
+          create: 'Создать задачу',
+        },
+      }
     },
     formNames: {
       email: 'почтовый адрес',
