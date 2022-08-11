@@ -11,8 +11,10 @@ block content
       tr
         th= t('views.tasks.id')
         th= t('views.tasks.name')
-        th= t('views.tasks.email')
-        th= t('views.tasks.createdAt')
+        th= t('views.tasks.status')
+        th= t('views.tasks.creator')
+        th= t('views.tasks.executor')
+        th= t('views.tasks.dateCreate')
     tbody
       each task in tasks
         tr

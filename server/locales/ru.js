@@ -7,6 +7,7 @@ export default {
       change: 'Изменить',
       delete: 'Удалить',
       edit: 'Редактировать',
+      submit: 'Создать',
     },
     flash: {
       session: {
@@ -96,9 +97,12 @@ export default {
       tasks: {
         id: "ID",
         name: 'Наименование',
-        email: 'asdl',
-        createdAt: '  adasd',
+        email: 'email',
+        createdAt: 'Дата создания',
         title: 'Задачи',
+        creator: 'Автор',
+        status: 'Статус',
+        executor: 'Исполнитель',
         dateCreate: 'Дата создания',
         new: {
           name: 'Наименование',
@@ -112,6 +116,10 @@ export default {
       password: 'пароль',
       createdAt: 'дата создания',
       name: 'название',
+      description: 'Описание',
+      status: 'Статус',
+      executor: 'Исполнитель',
+      labels: 'Метки',
     },
   },
 };
