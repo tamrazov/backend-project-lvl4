@@ -71,14 +71,20 @@ export default {
         },
       },
       statuses: {
-        name: 'Имя',
+        title: 'Статусы',
         new: {
+          title: 'Создание статуса',
           submit: 'Создать',
           signUp: 'Регистрация',
+          create: 'Создать статус',
         },
         edit: {
-          title: 'Редактирование статуса',
+          title: 'Изменение статуса',
+          submit: 'Изменить'
         },
+        id: 'ID',
+        dateCreate: 'Дата создания',
+        name: 'Наименование',
       },
       labels: {
         title: 'Метки',

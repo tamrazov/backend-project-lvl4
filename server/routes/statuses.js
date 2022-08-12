@@ -6,6 +6,7 @@ export default async (app) => {
   app
     .get('/statuses', { name: 'statuses' }, async (req, reply) => {
       const statuses = await app.objection.models.status.query();
+      console.log(statuses, 'statuses statuses statuses')
 
       reply.render('statuses/index', { statuses });
       return reply;
@@ -16,7 +17,7 @@ export default async (app) => {
       reply.render('statuses/new');
       return reply;
     })
-    .get('/statuses/:id/edit', { name: 'statuses/edit' }, async (req, reply) => {
+    .get('/statuses/:id/edit', { name: 'editStatusPage' }, async (req, reply) => {
       const { id } = req.params;
       const status = await app.objection.models.status.query().findById(id);
 
@@ -30,11 +31,12 @@ export default async (app) => {
       try {
         const validStatus = await app.objection.models.status.fromJson(req.body.data);
         await app.objection.models.status.query().insert(validStatus);
+        const statuses = await app.objection.models.status.query();
         // req.flash('info', i18next.t('flash.users.create.success'));
-        reply.redirect(app.reverse('root'));
+        reply.render('statuses/index', { statuses });
       } catch ({ data }) {
         // req.flash('error', i18next.t('flash.users.create.error'));
-        reply.render('status/new', { status, errors: data });
+        reply.render('statuses/new', { status, errors: data });
       }
 
       return reply;

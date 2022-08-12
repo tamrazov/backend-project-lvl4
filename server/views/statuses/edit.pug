@@ -4,8 +4,6 @@ block header
   = t('views.statuses.edit.title')
 
 block content
-  +formFor()(action=route('editStatus', { id: '1' }) method='post')
+  +formFor()(action=route('editStatus', { id: status.id }) method='post')
     +input(status, 'name', errors)(type="text")
-    div
-        +buttonTo(status)(value=t('views.statuses.new.submit'))
-        +buttonTo(status, )(value=t('delete'))
+    +submit(label)(value=t('buttons.edit'))
