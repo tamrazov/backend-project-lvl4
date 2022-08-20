@@ -8,6 +8,7 @@ block content
         th= t('views.users.name')
         th= t('views.users.email')
         th= t('views.users.createdAt')
+        th= t('views.users.moves')
     tbody
       each user in users
         tr
@@ -16,3 +17,6 @@ block content
           td
            a(href=`users/${user.id}`)= user.email
           td= formatDate(user.createdAt)
+          td.d-flex
+            a(class='btn btn-primary' href=route('editUserPage', { id: user.id}))=t('buttons.change')
+            +buttonTo(route('editUserPage', { id: user.id}), 'delete')(class="btn btn-danger ml-5" value=t('buttons.delete'))

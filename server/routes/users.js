@@ -29,18 +29,29 @@ export default (app) => {
 
       return reply;
     })
-    .get('/users/:id', async (req, reply) => {
+    .get('/users/:id', { name: 'editUserPage' }, async (req, reply) => {
       const { id } = req.params;
       const user = await app.objection.models.user.query().findById(id);
+
+      if (!req.isAuthenticated()) {
+        const users = await app.objection.models.user.query();
+
+        req.flash('error', i18next.t('flash.users.create.error'));
+        reply.render('users/index', { users });
+        return reply;
+      }
+      
+      console.log(user, 'user user')
 
       reply.render('users/user', { user });
     })
     .post('/users/:id', { name: 'editUser' }, async (req, reply) => {
       const { id } = req.params;
-      const { email, password } = req.body.data;
+      const { name, email, password } = req.body.data;
       const user = await app.objection.models.user.query().findById(id);
 
       await user.$query().patch({
+        name,
         email,
         password,
       });

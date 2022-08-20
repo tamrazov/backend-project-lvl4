@@ -58,6 +58,8 @@ export default {
         email: 'Email',
         name: 'Полное имя',
         createdAt: 'Дата создания',
+        moves: 'Действия',
+        edit: 'Изменение пользователя',
         new: {
           submit: 'Сохранить',
           signUp: 'Регистрация',
