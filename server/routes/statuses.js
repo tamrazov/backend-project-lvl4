@@ -6,7 +6,6 @@ export default async (app) => {
   app
     .get('/statuses', { name: 'statuses' }, async (req, reply) => {
       const statuses = await app.objection.models.status.query();
-      console.log(statuses, 'statuses statuses statuses')
 
       reply.render('statuses/index', { statuses });
       return reply;

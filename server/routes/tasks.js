@@ -4,13 +4,16 @@ export default (app) => {
   app
     .get('/tasks', { name: 'tasks' }, async (req, reply) => {
       const tasks = await app.objection.models.task.query();
-      console.log(tasks)
 
       reply.render('tasks/index', { tasks });
       return reply;
     })
     .get('/tasks/new', { name: 'newTask' }, async (req, reply) => {
       const task = new app.objection.models.task();
+      const status = await task.$relatedQuery('status')
+    
+      console.log(status, 'status')
+
       reply.render('tasks/new', { task });
     })
     .get('/tasks/:id', async (req, reply) => {
